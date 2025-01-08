@@ -4,7 +4,7 @@ import { OrbitControls } from "jsm/controls/OrbitControls.js";
 // Custom function that generates a starfield - *see getStarfield.js
 import getStarfield from "./getStarfield.js";
 
-// -----INITIAL SCENE SETUP----- //
+// 1. -----INITIAL SCENE SETUP----- //
 
 // Width/Height of browser window
 const width = window.innerWidth;
@@ -30,13 +30,11 @@ const scene = new THREE.Scene();
 
 // Mouse controls
 const controls = new OrbitControls(camera, renderer.domElement);
-// Smoothes camera movement
-controls.enableDamping = true;
-controls.dampingFactor = 0.03;
 
-// -----END OF SCENE SETUP----- //
 
-// SUN SETUP
+// 2. -----STARS/PLANETS SETUP----- //
+
+// Create Sun
 const sun_loader = new THREE.TextureLoader();
 const sun_geo = new THREE.SphereGeometry(4.3, 32, 16); 
 const sun_mat = new THREE.MeshStandardMaterial( { map: sun_loader.load("Textures/sunmap.jpg") });
@@ -44,7 +42,7 @@ const sun = new THREE.Mesh(sun_geo, sun_mat);
 // Add Sun to scene
 scene.add(sun);
 
-// VENUS SETUP
+// Create Venus
 const venus_loader = new THREE.TextureLoader();
 const venus_geo = new THREE.SphereGeometry(0.38, 32, 16); 
 const venus_mat = new THREE.MeshStandardMaterial( { map: venus_loader.load("Textures/venusmap.jpg") });
@@ -53,7 +51,7 @@ const venus = new THREE.Mesh(venus_geo, venus_mat);
 venus.position.set(10, 0, 0);
 scene.add(venus);
 
-// EARTH SETUP
+// Create Earth
 const earth_loader = new THREE.TextureLoader();
 const earth_geo = new THREE.SphereGeometry(0.4, 32, 16); 
 const earth_mat = new THREE.MeshStandardMaterial( { map: earth_loader.load("Textures/earthmap1k.jpg") });
@@ -62,7 +60,7 @@ const earth = new THREE.Mesh(earth_geo, earth_mat);
 earth.position.set(15, 0, 0);
 scene.add(earth);
 
-// JUPITER SETUP
+// Create Jupiter
 const jup_loader = new THREE.TextureLoader();
 const jup_geo = new THREE.SphereGeometry(1, 32, 16); 
 const jup_mat = new THREE.MeshStandardMaterial( { map: jup_loader.load("Textures/jupitermap.jpg") });
@@ -71,15 +69,16 @@ const jupiter = new THREE.Mesh(jup_geo, jup_mat);
 jupiter.position.set(25, 0, 0);
 scene.add(jupiter);
 
-// STARS SETUP
+// Create starfield
 const stars = getStarfield({numStars: 200});
 scene.add(stars);
 
-// HEMISPHERE LIGHTING
+// Add hemisphere lighting
 const hemiLight = new THREE.HemisphereLight(0xffffff, 0x000000)
 scene.add(hemiLight);
 
-// -----CALCULATE ORBITS----- //
+
+// 3. -----PLANET ORBITS SETUP----- //
 
 // Planet angles
 let earth_angle = 0;
@@ -96,17 +95,21 @@ const earth_or = 15;
 const venus_or = 10;
 const jup_or = 25;
 
-// Animation loop
+
+// 4. -----ANIMATION LOOP----- //
+
 function animate(t = 0) {
     requestAnimationFrame(animate);
 
-    // Rotation speed - proportional to elapsed time (milliseconds)
+    /* Rotate the planets on their axes
+        Rotation speed - proportional to elapsed time (milliseconds) */
     const rot_speed = t * 0.0001;
     sun.rotation.y = rot_speed;
     venus.rotation.y = rot_speed;
     earth.rotation.y = rot_speed;
     jupiter.rotation.y = rot_speed;
 
+    // Continuously increases planets' angles
     earth_angle += earth_os;
     venus_angle += venus_os;
     jup_angle += jup_os;
@@ -120,12 +123,6 @@ function animate(t = 0) {
 
     jupiter.position.x = jup_or * Math.cos(jup_angle);
     jupiter.position.z = jup_or * Math.sin(jup_angle);
-
-    // Rotate the planets on their axes
-    sun.rotation.y += 0.01;
-    earth.rotation.y += 0.01;
-    venus.rotation.y += 0.01;
-    jupiter.rotation.y += 0.01;
 
     // Render the scene
     renderer.render(scene, camera);
