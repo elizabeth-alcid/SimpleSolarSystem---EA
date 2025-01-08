@@ -27,14 +27,14 @@ Step-by-step Implementation Guide (follows step-numbering in comments of index.j
 
 4. Animation Loop:
    Call requestAnimationFrame() to ensure continuous update of the animation. Set the y-axis rotation of the sun and planets
-   to simulate the rotation of the sun and planets on their axes. *Note the rotation speed is the elapsed time * 0.0001. This scaling
+   to simulate the rotation of the sun and planets on their axes. *Note the rotation speed is the elapsed time multiplied by 0.0001. This scaling
    ensures the planets won't spin too fast after each loop iteration. Next, update the planet angles by adding the planets'
    orbital speeds to the angle. This increases the angle with every loop iteration and simulates the planet moving around the Sun. Now, calculate
-   the new positions of each planet by setting the x and z positions of each planet to be its orbital radius times the cosine or sine of the angle. What
+   the new positions of each planet by setting the x and z positions of each planet to be its orbital radius multiplied by the cosine or sine of the angle. What
    we're doing is converting the polar coordinates (calculated using the orbital radius and planet angles) to Cartesian coordinates so that the animation can be
-   rendered more easily.
+   rendered.
 
-   Finally, render the final scene and update the controls (OrbitControls object) to ensure user mouse movemens are updated throughout the animation.
+   Finally, render the final scene and update the controls (OrbitControls object) to ensure user mouse movements are updated throughout the animation.
    Call the animate() loop.
 
 Possible Improvements:
