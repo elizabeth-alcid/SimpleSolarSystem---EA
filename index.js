@@ -37,7 +37,7 @@ const controls = new OrbitControls(camera, renderer.domElement);
 // Create Sun
 const sun_loader = new THREE.TextureLoader();
 const sun_geo = new THREE.SphereGeometry(4.3, 32, 16); 
-const sun_mat = new THREE.MeshStandardMaterial( { map: sun_loader.load("Textures/sunmap.jpg") });
+const sun_mat = new THREE.MeshStandardMaterial( { map: sun_loader.load("sunmap.jpg") });
 const sun = new THREE.Mesh(sun_geo, sun_mat);
 // Add Sun to scene
 scene.add(sun);
@@ -45,7 +45,7 @@ scene.add(sun);
 // Create Venus
 const venus_loader = new THREE.TextureLoader();
 const venus_geo = new THREE.SphereGeometry(0.38, 32, 16); 
-const venus_mat = new THREE.MeshStandardMaterial( { map: venus_loader.load("Textures/venusmap.jpg") });
+const venus_mat = new THREE.MeshStandardMaterial( { map: venus_loader.load("venusmap.jpg") });
 const venus = new THREE.Mesh(venus_geo, venus_mat);
 // Add Venus to scene
 venus.position.set(10, 0, 0);
@@ -54,7 +54,7 @@ scene.add(venus);
 // Create Earth
 const earth_loader = new THREE.TextureLoader();
 const earth_geo = new THREE.SphereGeometry(0.4, 32, 16); 
-const earth_mat = new THREE.MeshStandardMaterial( { map: earth_loader.load("Textures/earthmap1k.jpg") });
+const earth_mat = new THREE.MeshStandardMaterial( { map: earth_loader.load("earthmap1k.jpg") });
 const earth = new THREE.Mesh(earth_geo, earth_mat);
 // Add Earth to scene
 earth.position.set(15, 0, 0);
@@ -63,7 +63,7 @@ scene.add(earth);
 // Create Jupiter
 const jup_loader = new THREE.TextureLoader();
 const jup_geo = new THREE.SphereGeometry(1, 32, 16); 
-const jup_mat = new THREE.MeshStandardMaterial( { map: jup_loader.load("Textures/jupitermap.jpg") });
+const jup_mat = new THREE.MeshStandardMaterial( { map: jup_loader.load("jupitermap.jpg") });
 const jupiter = new THREE.Mesh(jup_geo, jup_mat);
 // Add Jupiter to scene
 jupiter.position.set(25, 0, 0);
